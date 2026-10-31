@@ -93,7 +93,7 @@ class DiscordClient(discord.Client):
             self._to_endstone.put(
                 {
                     "event": "message",
-                    "data": {"message": f"<{message.author}> {message.content}"},
+                    "data": {"message": f"<{message.author.display_name}> {message.content}"},
                 }
             )
         if message.channel.id == int(self._config["channels"].get("console", 0)):
