@@ -77,10 +77,19 @@ class DiscordPlugin(Plugin):
 
     @event_handler
     def on_player_death(self, event: PlayerDeathEvent) -> None:
+        msg = event.death_message
+
+        if msg is None:
+            return
+
+        message = self.server.language.translate(
+            msg, locale="en_US"
+        )
+
         self._to_discord.put(
             {
                 "event": "death",
-                "data": {"death_message": event.death_message},
+                "data": {"death_message": message},
             }
         )
 
